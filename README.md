@@ -1,16 +1,11 @@
 # brew_crew
 
-A new Flutter project.
+A Flutter+Firebase project.
 
-## Getting Started
+## What's about
 
-This project is a starting point for a Flutter application.
+This project is my first look into Firebase and how to use it in flutter apps.
 
-A few resources to get you started if this is your first Flutter project:
+It was developed following the [tutorial series](https://youtube.com/playlist?list=PL4cUxeGkcC9j--TKIdkb3ISfRbJeJYQwC) of The Net Ninja on Youtube.
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Still in progress...
