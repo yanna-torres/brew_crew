@@ -150,7 +150,7 @@ class _RegisterPageState extends State<RegisterPage> {
                       borderRadius: BorderRadius.circular(10),
                       side: const BorderSide(color: Colors.brown, width: 2),
                     ),
-                    backgroundColor: Colors.transparent,
+                    backgroundColor: Colors.brown.shade100,
                     elevation: 0.0,
                     foregroundColor: Colors.brown,
                   ),
