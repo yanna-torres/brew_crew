@@ -1,6 +1,7 @@
 // ignore_for_file: use_build_context_synchronously, prefer_typing_uninitialized_variables
 
 import 'package:brew_crew/services/auth.dart';
+import 'package:brew_crew/ui-components/snack_bars.dart';
 import 'package:brew_crew/ui-components/text_field.dart';
 import 'package:flutter/material.dart';
 
@@ -17,6 +18,8 @@ class _LoginPageState extends State<LoginPage> {
   TextEditingController controllerEmail = TextEditingController();
   TextEditingController controllerPassword = TextEditingController();
   final formLoginKey = GlobalKey<FormState>();
+  String? email = "";
+  String? password = "";
 
   @override
   Widget build(BuildContext context) {
@@ -42,15 +45,20 @@ class _LoginPageState extends State<LoginPage> {
                 ),
                 const SizedBox(height: 50),
                 MyTextField(
-                  controller: controllerPassword,
+                  controller: controllerEmail,
+                  onChanged: (value) {
+                    setState(() {
+                      email = value;
+                    });
+                  },
                   label: "E-mail",
                   icon: Icons.alternate_email_rounded,
                   validator: (value) {
                     if (value == null) {
-                      return 'Fill this field with an e-mail';
+                      return 'Enter an e-mail';
                     } else if (value.contains('@') == false ||
                         value.contains('.') == false) {
-                      return 'Fill with an valid e-mail';
+                      return 'Enter an valid e-mail';
                     } else {
                       return null;
                     }
@@ -59,12 +67,15 @@ class _LoginPageState extends State<LoginPage> {
                 const SizedBox(height: 25),
                 MyTextField(
                   controller: controllerPassword,
+                  onChanged: (value) {
+                    setState(() {
+                      password = value;
+                    });
+                  },
                   label: "Password",
                   icon: Icons.abc,
                   validator: (value) {
-                    if (value == null) {
-                      return 'Fill with your password';
-                    } else if (value.length < 6) {
+                    if (value!.length < 6) {
                       return 'Your password must have at least 6 characters';
                     } else {
                       return null;
@@ -84,9 +95,19 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                   ),
                   onPressed: () async {
-                    print(controllerEmail.text);
-                    print(controllerPassword.text);
-                    if (formLoginKey.currentState!.validate()) {}
+                    if (formLoginKey.currentState!.validate()) {
+                      dynamic result = await _authService.loginEmailAndPassword(
+                        email: email!,
+                        password: password!,
+                      );
+                      if (result == null) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          errorMessage(
+                            error: "Something went wrong! Try again",
+                          ),
+                        );
+                      }
+                    }
                   },
                   child: const Text(
                     'Login',

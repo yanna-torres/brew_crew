@@ -106,7 +106,7 @@ class _RegisterPageState extends State<RegisterPage> {
                       if (result == null) {
                         ScaffoldMessenger.of(context).showSnackBar(
                           errorMessage(
-                            error: "Something went wrong! Check email",
+                            error: "Something went wrong! Email is valid?",
                           ),
                         );
                       }

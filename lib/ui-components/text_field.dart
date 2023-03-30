@@ -27,33 +27,7 @@ class _MyTextFieldState extends State<MyTextField> {
   Widget build(BuildContext context) {
     return TextFormField(
       obscureText: widget.isPassword ? (!visible ? true : false) : false,
-      decoration: InputDecoration(
-        enabledBorder: OutlineInputBorder(
-          borderSide: const BorderSide(
-            color: Colors.transparent,
-          ),
-          borderRadius: BorderRadius.circular(15),
-        ),
-        errorBorder: OutlineInputBorder(
-          borderSide: const BorderSide(
-            color: Colors.red,
-          ),
-          borderRadius: BorderRadius.circular(15),
-        ),
-        focusedBorder: OutlineInputBorder(
-          borderSide: BorderSide(
-            color: Colors.brown.shade300,
-          ),
-          borderRadius: BorderRadius.circular(15),
-        ),
-        focusedErrorBorder: OutlineInputBorder(
-          borderSide: const BorderSide(
-            color: Colors.red,
-          ),
-          borderRadius: BorderRadius.circular(15),
-        ),
-        filled: true,
-        fillColor: Colors.brown.shade400.withOpacity(0.3),
+      decoration: textFieldDecoration.copyWith(
         label: Text(
           widget.label,
           style: const TextStyle(
@@ -61,7 +35,6 @@ class _MyTextFieldState extends State<MyTextField> {
             // color: Color(0xFF949494),
           ),
         ),
-        floatingLabelBehavior: FloatingLabelBehavior.never,
         prefixIcon: widget.isPassword
             ? IconButton(
                 onPressed: () {
@@ -86,3 +59,33 @@ class _MyTextFieldState extends State<MyTextField> {
     );
   }
 }
+
+InputDecoration textFieldDecoration = InputDecoration(
+  enabledBorder: OutlineInputBorder(
+    borderSide: const BorderSide(
+      color: Colors.transparent,
+    ),
+    borderRadius: BorderRadius.circular(15),
+  ),
+  errorBorder: OutlineInputBorder(
+    borderSide: const BorderSide(
+      color: Colors.red,
+    ),
+    borderRadius: BorderRadius.circular(15),
+  ),
+  focusedBorder: OutlineInputBorder(
+    borderSide: BorderSide(
+      color: Colors.brown.shade300,
+    ),
+    borderRadius: BorderRadius.circular(15),
+  ),
+  focusedErrorBorder: OutlineInputBorder(
+    borderSide: const BorderSide(
+      color: Colors.red,
+    ),
+    borderRadius: BorderRadius.circular(15),
+  ),
+  filled: true,
+  fillColor: Colors.brown.shade400.withOpacity(0.3),
+  floatingLabelBehavior: FloatingLabelBehavior.never,
+);
