@@ -1,6 +1,7 @@
-// ignore_for_file: use_build_context_synchronously
+// ignore_for_file: use_build_context_synchronously, prefer_typing_uninitialized_variables
 
 import 'package:brew_crew/services/auth.dart';
+import 'package:brew_crew/ui-components/text_field.dart';
 import 'package:flutter/material.dart';
 
 class LoginPage extends StatefulWidget {
@@ -15,21 +16,16 @@ class _LoginPageState extends State<LoginPage> {
   bool visible = false;
   TextEditingController controllerEmail = TextEditingController();
   TextEditingController controllerPassword = TextEditingController();
-  final formKey = GlobalKey<FormState>();
+  final formLoginKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // appBar: AppBar(
-      //   elevation: 0.0,
-      //   title: const Text('Login'),
-      //   centerTitle: true,
-      // ),
       body: Center(
         child: SingleChildScrollView(
           padding: const EdgeInsets.all(25),
           child: Form(
-            key: formKey,
+            key: formLoginKey,
             child: Column(
               children: [
                 Image.asset(
@@ -45,17 +41,10 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                 ),
                 const SizedBox(height: 50),
-                TextFormField(
-                  controller: controllerEmail,
-                  style: const TextStyle(
-                    fontWeight: FontWeight.bold,
-                    color: Colors.black,
-                  ),
-                  onChanged: (value) {},
-                  decoration: myDecoration(
-                    label: 'E-mail',
-                    icon: const Icon(Icons.alternate_email_rounded),
-                  ),
+                MyTextField(
+                  controller: controllerPassword,
+                  label: "E-mail",
+                  icon: Icons.alternate_email_rounded,
                   validator: (value) {
                     if (value == null) {
                       return 'Fill this field with an e-mail';
@@ -68,23 +57,10 @@ class _LoginPageState extends State<LoginPage> {
                   },
                 ),
                 const SizedBox(height: 25),
-                TextFormField(
+                MyTextField(
                   controller: controllerPassword,
-                  obscureText: !visible ? true : false,
-                  onChanged: (value) {},
-                  decoration: myDecoration(
-                    label: 'Password',
-                    icon: InkWell(
-                      onTap: () {
-                        setState(() {
-                          visible = !visible;
-                        });
-                      },
-                      child: visible
-                          ? const Icon(Icons.visibility_outlined)
-                          : const Icon(Icons.visibility_off_outlined),
-                    ),
-                  ),
+                  label: "Password",
+                  icon: Icons.abc,
                   validator: (value) {
                     if (value == null) {
                       return 'Fill with your password';
@@ -94,6 +70,7 @@ class _LoginPageState extends State<LoginPage> {
                       return null;
                     }
                   },
+                  isPassword: true,
                 ),
                 const SizedBox(height: 50),
                 ElevatedButton(
@@ -109,7 +86,7 @@ class _LoginPageState extends State<LoginPage> {
                   onPressed: () async {
                     print(controllerEmail.text);
                     print(controllerPassword.text);
-                    if (formKey.currentState!.validate()) {}
+                    if (formLoginKey.currentState!.validate()) {}
                   },
                   child: const Text(
                     'Login',

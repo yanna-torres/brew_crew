@@ -1,5 +1,8 @@
+// ignore_for_file: prefer_typing_uninitialized_variables, use_build_context_synchronously
+
 import 'package:brew_crew/services/auth.dart';
-import 'package:brew_crew/ui/authenticate/login.dart';
+import 'package:brew_crew/ui-components/snack_bars.dart';
+import 'package:brew_crew/ui-components/text_field.dart';
 import 'package:flutter/material.dart';
 
 class RegisterPage extends StatefulWidget {
@@ -13,9 +16,11 @@ class RegisterPage extends StatefulWidget {
 class _RegisterPageState extends State<RegisterPage> {
   final AuthService _authService = AuthService();
   bool visible = false;
-  TextEditingController controllerEmail = TextEditingController();
+  final TextEditingController controllerEmail = TextEditingController();
   TextEditingController controllerPassword = TextEditingController();
-  final formKey = GlobalKey<FormState>();
+  final formRegisterKey = GlobalKey<FormState>();
+  String? email = "";
+  String? password = "";
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +29,7 @@ class _RegisterPageState extends State<RegisterPage> {
         child: SingleChildScrollView(
           padding: const EdgeInsets.all(25),
           child: Form(
-            key: formKey,
+            key: formRegisterKey,
             child: Column(
               children: [
                 Image.asset(
@@ -40,55 +45,44 @@ class _RegisterPageState extends State<RegisterPage> {
                   ),
                 ),
                 const SizedBox(height: 50),
-                TextFormField(
+                MyTextField(
                   controller: controllerEmail,
-                  style: const TextStyle(
-                    fontWeight: FontWeight.bold,
-                    color: Colors.black,
-                  ),
-                  onChanged: (value) {},
-                  decoration: myDecoration(
-                    label: 'E-mail',
-                    icon: const Icon(Icons.alternate_email_rounded),
-                  ),
+                  onChanged: (value) {
+                    setState(() {
+                      email = value;
+                    });
+                  },
+                  label: "E-mail",
+                  icon: Icons.alternate_email_rounded,
                   validator: (value) {
                     if (value == null) {
-                      return 'Fill this field with an e-mail';
+                      return 'Enter an e-mail';
                     } else if (value.contains('@') == false ||
                         value.contains('.') == false) {
-                      return 'Fill with an valid e-mail';
+                      return 'Enter an valid e-mail';
                     } else {
                       return null;
                     }
                   },
                 ),
                 const SizedBox(height: 25),
-                TextFormField(
+                MyTextField(
                   controller: controllerPassword,
-                  obscureText: !visible ? true : false,
-                  onChanged: (value) {},
-                  decoration: myDecoration(
-                    label: 'Password',
-                    icon: InkWell(
-                      onTap: () {
-                        setState(() {
-                          visible = !visible;
-                        });
-                      },
-                      child: visible
-                          ? const Icon(Icons.visibility_outlined)
-                          : const Icon(Icons.visibility_off_outlined),
-                    ),
-                  ),
+                  onChanged: (value) {
+                    setState(() {
+                      password = value;
+                    });
+                  },
+                  label: "Password",
+                  icon: Icons.abc,
                   validator: (value) {
-                    if (value == null) {
-                      return 'Fill with your password';
-                    } else if (value.length < 6) {
+                    if (value!.length < 6) {
                       return 'Your password must have at least 6 characters';
                     } else {
                       return null;
                     }
                   },
+                  isPassword: true,
                 ),
                 const SizedBox(height: 50),
                 ElevatedButton(
@@ -102,9 +96,21 @@ class _RegisterPageState extends State<RegisterPage> {
                     ),
                   ),
                   onPressed: () async {
-                    print(controllerEmail.text);
-                    print(controllerPassword.text);
-                    if (formKey.currentState!.validate()) {}
+                    if (formRegisterKey.currentState!.validate()) {
+                      // TODO: mudar para pegar o texto direto dos controllers
+                      dynamic result =
+                          await _authService.registerEmailAndPassword(
+                        email: email!,
+                        password: password!,
+                      );
+                      if (result == null) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          errorMessage(
+                            error: "Something went wrong! Check email",
+                          ),
+                        );
+                      }
+                    }
                   },
                   child: const Text(
                     'Register',
@@ -140,6 +146,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   ],
                 ),
                 const SizedBox(height: 30),
+                // go back to login
                 ElevatedButton(
                   style: ElevatedButton.styleFrom(
                     padding: const EdgeInsets.symmetric(

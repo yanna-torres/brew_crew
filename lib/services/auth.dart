@@ -27,7 +27,23 @@ class AuthService {
 
   //TODO sign-in email
 
-  //TODO register
+  /// register with email and password
+  Future registerEmailAndPassword({
+    required String email,
+    required String password,
+  }) async {
+    try {
+      UserCredential result = await _auth.createUserWithEmailAndPassword(
+        email: email,
+        password: password,
+      );
+      User? newUser = result.user;
+      return _userFromFirebae(newUser);
+    } catch (error) {
+      print(error.toString());
+      return null;
+    }
+  }
 
   /// sign-out
   Future signOut() async {
