@@ -1,8 +1,8 @@
 // ignore_for_file: no_leading_underscores_for_local_identifiers
 
+import 'package:brew_crew/models/brew.dart';
 import 'package:brew_crew/services/auth.dart';
 import 'package:brew_crew/ui/coffee/brew_list.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:brew_crew/services/database.dart';
 import 'package:provider/provider.dart';
@@ -13,8 +13,8 @@ class UsersPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final AuthService _auth = AuthService();
-    return StreamProvider<QuerySnapshot?>.value(
-      initialData: null,
+    return StreamProvider<List<Brew>>.value(
+      initialData: [],
       value: DatabaseService().brews,
       child: Scaffold(
         appBar: AppBar(
