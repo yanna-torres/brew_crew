@@ -20,4 +20,9 @@ class DatabaseService {
       'strengh': strengh,
     });
   }
+
+  /// Get brews streams
+  Stream<QuerySnapshot?> get brews {
+    return brewCollection.snapshots();
+  }
 }
