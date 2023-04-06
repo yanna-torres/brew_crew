@@ -8,4 +8,4 @@ This project is my first look into Firebase and how to use it in flutter apps.
 
 It was developed following the [tutorial series](https://youtube.com/playlist?list=PL4cUxeGkcC9j--TKIdkb3ISfRbJeJYQwC) of The Net Ninja on Youtube.
 
-Still in progress...
+An app for brew preferences :)
