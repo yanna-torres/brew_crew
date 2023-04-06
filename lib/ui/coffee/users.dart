@@ -17,12 +17,19 @@ class UsersPage extends StatelessWidget {
 
     void _showSettingsPanel() {
       showModalBottomSheet(
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(25),
+            topRight: Radius.circular(25),
+          ),
+        ),
         context: context,
         builder: (context) {
           return Container(
-            padding: const EdgeInsets.symmetric(
-              horizontal: 50.0,
-              vertical: 10.0,
+            padding: const EdgeInsets.only(
+              left: 50.0,
+              right: 50.0,
+              bottom: 25.0,
             ),
             child: SingleChildScrollView(
               child: Column(
@@ -74,7 +81,7 @@ class UsersPage extends StatelessWidget {
                 onPressed: () => _showSettingsPanel(),
                 icon: const Icon(Icons.settings_rounded, size: 25),
                 label: const Text(
-                  "Settings",
+                  "Preference Settings",
                   style: TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.bold,

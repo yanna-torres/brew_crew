@@ -11,11 +11,10 @@ class Wrapper extends StatelessWidget {
   Widget build(BuildContext context) {
     final user = Provider.of<UserApp?>(context);
 
-    // TODO: return either users ou authenticate
     if (user == null) {
       return const Authenticate();
     } else {
-      return UsersPage();
+      return const UsersPage();
     }
   }
 }

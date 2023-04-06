@@ -9,6 +9,7 @@ class MyTextField extends StatefulWidget {
     required this.validator,
     this.isPassword = false,
     this.onChanged,
+    this.initialValue,
   });
   final TextEditingController controller;
   final String label;
@@ -16,6 +17,7 @@ class MyTextField extends StatefulWidget {
   final String? Function(String? value)? validator;
   final String? Function(String? value)? onChanged;
   final bool isPassword;
+  final String? initialValue;
 
   @override
   State<MyTextField> createState() => _MyTextFieldState();
@@ -26,6 +28,7 @@ class _MyTextFieldState extends State<MyTextField> {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      initialValue: widget.initialValue,
       obscureText: widget.isPassword ? (!visible ? true : false) : false,
       decoration: textFieldDecoration.copyWith(
         label: Text(
