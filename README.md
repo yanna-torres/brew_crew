@@ -11,5 +11,7 @@ It was developed following the [tutorial series](https://youtube.com/playlist?li
 An app for brew preferences :)
 
 <div align="center">
-  <img scr="login.png">
+  <img scr="https://github.com/yanna-torres/brew_crew/blob/master/login.png">
+  <img scr="https://github.com/yanna-torres/brew_crew/blob/master/home.png">
+  <img scr="https://github.com/yanna-torres/brew_crew/blob/master/preferences.png">
 </div>
