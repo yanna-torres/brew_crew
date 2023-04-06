@@ -14,12 +14,6 @@ class _BrewListState extends State<BrewList> {
   @override
   Widget build(BuildContext context) {
     final brews = Provider.of<List<Brew>>(context);
-
-    // brews.forEach((brew) {
-    //   print(brew.name);
-    //   print(brew.strength);
-    //   print(brew.sugars);
-    // });
     if (brews.isEmpty) {
       return Container(
         padding: const EdgeInsets.all(25),
@@ -32,18 +26,15 @@ class _BrewListState extends State<BrewList> {
         ),
       );
     } else {
-      return SingleChildScrollView(
-        padding: const EdgeInsets.all(25),
-        child: ListView.builder(
-          physics: const NeverScrollableScrollPhysics(),
-          itemBuilder: (context, index) {
-            return BrewTile(
-              brew: brews[index],
-            );
-          },
-          itemCount: brews.length,
-          shrinkWrap: true,
-        ),
+      return ListView.builder(
+        physics: const NeverScrollableScrollPhysics(),
+        itemBuilder: (context, index) {
+          return BrewTile(
+            brew: brews[index],
+          );
+        },
+        itemCount: brews.length,
+        shrinkWrap: true,
       );
     }
   }

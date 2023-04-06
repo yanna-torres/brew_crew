@@ -11,8 +11,15 @@ class BrewTile extends StatelessWidget {
       margin: const EdgeInsets.only(bottom: 15),
       padding: const EdgeInsets.symmetric(vertical: 10),
       decoration: BoxDecoration(
-        color: Colors.white70,
+        color: const Color(0xFFF3F0EE),
         borderRadius: BorderRadius.circular(15),
+        boxShadow: const [
+          BoxShadow(
+            color: Color(0x40000000),
+            blurRadius: 5.0,
+            offset: Offset(0, 0),
+          ),
+        ],
       ),
       child: ListTile(
         iconColor: Colors.brown[brew.strength],
